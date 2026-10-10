@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +35,7 @@ public class Inventario {
 	private Integer numeroInventario;
 	
 	@Column(name="fecha_vencimiento")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaVencimiento;
 	
 	@Column(name = "costo_ingreso")
@@ -41,10 +43,7 @@ public class Inventario {
 	
 	@Column(name = "cantidad")
 	private Integer cantidad;
-	
-	@Column(name = "stock_maximo")
-	private Integer stockMaximo;
-	
+
 	@Column(name="lote")
 	private String lote;
 

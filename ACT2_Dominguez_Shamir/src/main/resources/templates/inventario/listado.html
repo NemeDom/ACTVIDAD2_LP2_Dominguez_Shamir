@@ -19,7 +19,7 @@
 						<h1 class="card-title">Listado de productos</h1>
 					</div>
 					<div class="col-md-2">
-						<a href="#" class="btn btn-success w-100"> <i class="fa-solid fa-plus"></i>
+						<a th:href="@{/inventario/nuevo}" class="btn btn-success w-100"> <i class="fa-solid fa-plus"></i>
 							Nuevo
 						</a>
 					</div>
@@ -42,18 +42,18 @@
 							</tr>
 						</thead>
 						<tbody class="table-secondary">
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+							<tr th:each="item: ${lstInventario}">
+								<td th:text="${item.numeroInventario}"></td>
+								<td th:text="${item.fechaVencimiento}"></td>
+								<td th:text="${item.producto.categoria.descripcion}"></td>
+								<td th:text="${item.producto.nombre}"></td>
+								<td th:text="${item.producto.stockRestante}"></td>
+								<td th:text="${item.numeroInventario}"></td>
+								<td th:text="${item.costoIngreso}"></td>
+								<td th:text="${item.lote}"></td>
+								<td th:text="${item.codEstado}"></td>
 								<td class="text-center align-middle">
-									<a href="#" class="btn btn-outline-primary" title="Editar">
+									<a th:href="@{/inventario/edicion/{id}(id=${item.numeroInventario})}" class="btn btn-outline-primary" title="Editar">
 										<i class="fa-regular fa-pen-to-square"></i>
 									</a>
 								</td>
@@ -64,6 +64,7 @@
 			</div>
 		</div>
 	</div>
+	<th:block th:utext="${alert}"></th:bl
 </body>
 
 </html>

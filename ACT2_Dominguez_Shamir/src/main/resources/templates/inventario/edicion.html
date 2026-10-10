@@ -14,14 +14,18 @@
 	<div class="container mt-4">
 		<div class="card shadow-lg">
 			<div class="card-body">
-				<h1 class="text-center">Inventario - Nuevo</h1>
+				<h1 class="text-center" th:text="'Actualizar numero ' + ${inventario.numeroInventario}"></h1>
 				<div class="row d-flex justify-content-center">
 					<div class="col-md-6">
-						<form class="row g-2" action="#" method="post" novalidate>
+						<form th:action="@{/inventario/guardar}" class="row g-2" action="#" method="post" novalidate
+						th:object="${inventario}">
+						<input type="hidden" th:field="*{numeroInventario}" /> 
+
 							<div class="col-md-6 position-relative">
 								<label for="fechaVencimiento" class="form-label">Fecha de vencimiento</label>
 								<input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento"
-									required>
+									required
+									th:field="*{fechaVencimiento}">
 							</div>
 							<div class="col-md-6 position-relative">
 								<label for="producto" class="form-label">Producto</label>
@@ -29,8 +33,12 @@
 									<span class="input-group-text">
 										<i class="fa-solid fa-box"></i>
 									</span>
-									<select class="form-select" required id="producto" name="producto">
+									<select class="form-select" required id="producto" name="producto" th:field="*{producto}">
 										<option value="">--Seleccione--</option>
+										<option th:each="item: ${lstProductos}"
+										th:text="${item.nombre}"
+										th:value="${item.idProducto}"
+										></option>
 									</select>
 								</div>
 							</div>
@@ -39,7 +47,9 @@
 								<div class="input-group">
 									<span class="input-group-text">S/.</span>
 									<input type="number" class="form-control" step="0.01" placeholder="0.00"
-										id="costoIngreso" name="costoIngreso" required>
+										id="costoIngreso" name="costoIngreso" required
+										th:field="*{costoIngreso}"
+										>
 								</div>
 							</div>
 							<div class="col-md-6 position-relative">
@@ -49,7 +59,7 @@
 										<i class="fa-brands fa-stack-overflow"></i>
 									</span>
 									<input type="number" class="form-control" placeholder="0" id="cantidad"
-										name="cantidad" required>
+										name="cantidad" required th:field="*{cantidad}">
 								</div>
 							</div>
 							<div class="col-md-6 position-relative">
@@ -59,12 +69,12 @@
 										<i class="fa-solid fa-barcode"></i>
 									</span>
 									<input type="text" class="form-control" placeholder="Ingrese un lote" id="lote"
-										name="lote" required>
+										name="lote" required th:field="*{lote}">
 								</div>
 							</div>
 							<div class="col-md-6 position-relative">
 								<label for="codEstado" class="form-label">Estado</label>
-								<select class="form-select" id="codEstado" name="codEstado">
+								<select class="form-select" id="codEstado" name="codEstado" th:field="*{codEstado}">
 									<option value="">--Seleccione--</option>
 									<option value="A">Activo</option>
 									<option value="V">Vencido</option>
@@ -74,12 +84,12 @@
 							</div>
 							<div class="col-md-12 d-flex justify-content-between">
 								<!-- Botón Regresar -->
-								<a href="#" class="btn btn-outline-dark">
+								<a th:href="@{/inventario/listado}" class="btn btn-outline-dark">
 									<i class="fa-solid fa-reply"></i> Regresar
 								</a>
 								<!-- Botón Registrar -->
 								<button type="submit" class="btn btn-primary">
-									<i class="fa-solid fa-floppy-disk"></i> Registrar
+									<i class="fa-solid fa-floppy-disk"></i> Actualizar
 								</button>
 								<!-- Botón Limpiar -->
 								<button type="reset" class="btn btn-secondary">

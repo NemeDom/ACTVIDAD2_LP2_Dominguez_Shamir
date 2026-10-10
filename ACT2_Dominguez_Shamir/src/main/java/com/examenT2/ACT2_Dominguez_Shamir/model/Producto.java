@@ -44,5 +44,8 @@ public class Producto {
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-
+	public Integer getStockRestante() {
+		
+		return stockMaximo-stockActual;
+	}
 }
